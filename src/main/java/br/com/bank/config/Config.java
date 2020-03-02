@@ -15,9 +15,9 @@ public class Config {
 
   @Bean
   public void persistBank() {
-    repository.deleteAll();
-    repository
-        .saveAndFlush(new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "NUBANK"));
+    if (!repository.findByName("NUBANK").isPresent()) {
+      repository.saveAndFlush(
+          new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "NUBANK"));
+    }
   }
-
 }
