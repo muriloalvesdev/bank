@@ -33,7 +33,7 @@ public class Bank extends BaseEntity {
   @Column(name = "amount_available")
   private BigDecimal amountAvailable;
 
-  @OneToOne(optional = true, mappedBy = "bank")
+  @OneToOne(optional = true)
   private Cards card;
 
   @SuppressWarnings("unused")

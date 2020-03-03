@@ -13,7 +13,7 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "cards", uniqueConstraints = {@UniqueConstraint(columnNames = {"securityCode"})})
+@Table(name = "cards", uniqueConstraints = {@UniqueConstraint(columnNames = {"security_code"})})
 public class Cards extends BaseEntity {
 
   private static final long serialVersionUID = -1053993242101447545L;
@@ -32,7 +32,7 @@ public class Cards extends BaseEntity {
   @DateTimeFormat(pattern = "dd-MM-yyyy")
   private LocalDate validate;
 
-  @OneToOne(optional = false, mappedBy = "card")
+  @OneToOne(optional = false)
   private Bank bank;
 
   @SuppressWarnings("unused")
