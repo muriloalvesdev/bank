@@ -28,6 +28,18 @@ public class BankServiceImpl implements BankService {
   private CardsRepository cardsRepository;
 
   @Override
+  public CardsDataTransferObject findByCode(String code) {
+    Cards cards = cardsRepository.findBySecurityCode(Integer.parseInt(code))
+        .orElseThrow(() -> new RuntimeException("code informed not found!"));
+
+    CardsDataTransferObject cardsDTO = new CardsDataTransferObject();
+    cardsDTO.setCardNumber(cards.getCardNumber());
+    cardsDTO.setSecurityCode(cards.getSecurityCode().toString());
+    cardsDTO.setValidate(cards.getValidate().toString());
+    return cardsDTO;
+  }
+
+  @Override
   public void checkIfThereIsALimitOnTheCardAndDebitTheAvailableAmount(
       BankDataTransferObject bankDTO) {
     try {
@@ -92,5 +104,4 @@ public class BankServiceImpl implements BankService {
       throw new BankNotFoundException("Bank informed not found!");
     }
   }
-
 }
