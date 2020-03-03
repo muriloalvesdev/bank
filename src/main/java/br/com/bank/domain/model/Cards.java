@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "cards", uniqueConstraints = {@UniqueConstraint(columnNames = {"security_code"})})
@@ -29,7 +29,7 @@ public class Cards extends BaseEntity {
   private String cardNumber;
 
   @Column(name = "validate")
-  @DateTimeFormat(pattern = "dd-MM-yyyy")
+  @JsonFormat(pattern = "dd-MM-yyyy")
   private LocalDate validate;
 
   @OneToOne(optional = false)
