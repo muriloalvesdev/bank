@@ -22,12 +22,24 @@ public class Config {
 
   @Bean
   public void persistBank() {
+    System.out.println("bean persist iniciado");
+
     if (!bankRepository.findByName("NUBANK").isPresent()) {
+      System.out.println("banco nao existe, persistindo na base");
+
       Bank bank = bankRepository.saveAndFlush(
           new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "NUBANK"));
 
+
+      System.out.println("banco salvo na base, nome: " + bank.getName());
+
+
       Cards card = new Cards(789, "9999888877776666", LocalDate.parse("01-01-2100"), bank);
+
+      System.out.println("salvando cartao no banco: " + card.getSecurityCode());
       cardsRepository.saveAndFlush(card);
+
+      System.out.println("cartao salvo, uuid: " + card.getUuid());
       bank.setCard(card);
       bankRepository.saveAndFlush(bank);
     }
