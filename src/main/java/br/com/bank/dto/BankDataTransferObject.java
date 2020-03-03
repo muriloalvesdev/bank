@@ -4,38 +4,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BankDataTransferObject {
 
-    @JsonProperty("name")
-    private String name;
+  @JsonProperty("amount_sale")
+  private String amountSale;
 
-    @JsonProperty("agency")
-    private String agency;
+  @JsonProperty("card")
+  private CardsDataTransferObject card;
 
-    @JsonProperty("account")
-    private String account;
+  public String getAmountSale() {
+    return amountSale;
+  }
 
-    @JsonProperty("amount_sale")
-    private String amountSale;
+  public CardsDataTransferObject getCard() {
+    return card;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setCard(CardsDataTransferObject card) {
+    this.card = card;
+  }
 
-    public String getAgency() {
-        return agency;
-    }
+  public void setAmountSale(String amountSale) {
+    this.amountSale = amountSale;
+  }
 
-    public String getAccount() {
-        return account;
-    }
-
-    public String getAmountSale() {
-        return amountSale;
-    }
-
-    @Override
-    public String toString() {
-        return "BankDataTransferObject [name=" + name + ", agency=" + agency
-                + ", account=" + account + ", amountSale=" + amountSale + "]";
-    }
+  @Override
+  public String toString() {
+    return "BankDataTransferObject [amountSale=" + amountSale + ", card=" + card + "]";
+  }
 
 }

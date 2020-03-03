@@ -2,84 +2,92 @@ package br.com.bank.domain.model;
 
 import java.math.BigDecimal;
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "bank", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "account" }) })
+@Table(name = "bank", uniqueConstraints = {@UniqueConstraint(columnNames = {"account"})})
 public class Bank extends BaseEntity {
 
-    private static final long serialVersionUID = 1689419762198758933L;
+  private static final long serialVersionUID = 1689419762198758933L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID uuid;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private UUID uuid;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "agency")
-    private String agency;
+  @Column(name = "agency")
+  private String agency;
 
-    @Column(name = "account")
-    private String account;
+  @Column(name = "account")
+  private String account;
 
-    @Column(name = "amount_available")
-    private BigDecimal amountAvailable;
+  @Column(name = "amount_available")
+  private BigDecimal amountAvailable;
 
-    @SuppressWarnings("unused")
-    private Bank() {
-    }
+  @OneToOne(optional = true, mappedBy = "bank")
+  private Cards card;
 
-    public Bank(String agency, String account, BigDecimal amountAvailable,
-            String name) {
-        this.agency = agency;
-        this.account = account;
-        this.amountAvailable = amountAvailable;
-        this.name = name;
-    }
+  @SuppressWarnings("unused")
+  private Bank() {}
 
-    public String getAgency() {
-        return agency;
-    }
+  public Bank(String agency, String account, BigDecimal amountAvailable, String name) {
+    this.agency = agency;
+    this.account = account;
+    this.amountAvailable = amountAvailable;
+    this.name = name;
+  }
 
-    public void setAgency(String agency) {
-        this.agency = agency;
-    }
+  public String getAgency() {
+    return agency;
+  }
 
-    public String getAccount() {
-        return account;
-    }
+  public void setAgency(String agency) {
+    this.agency = agency;
+  }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
+  public String getAccount() {
+    return account;
+  }
 
-    public BigDecimal getAmountAvailable() {
-        return amountAvailable;
-    }
+  public void setAccount(String account) {
+    this.account = account;
+  }
 
-    public void setAmountAvailable(BigDecimal amountAvailable) {
-        this.amountAvailable = amountAvailable;
-    }
+  public BigDecimal getAmountAvailable() {
+    return amountAvailable;
+  }
 
-    public UUID getUuid() {
-        return uuid;
-    }
+  public void setAmountAvailable(BigDecimal amountAvailable) {
+    this.amountAvailable = amountAvailable;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public UUID getUuid() {
+    return uuid;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Cards getCard() {
+    return card;
+  }
+
+  public void setCard(Cards card) {
+    this.card = card;
+  }
 
 }

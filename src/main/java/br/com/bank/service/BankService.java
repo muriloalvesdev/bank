@@ -5,11 +5,7 @@ import br.com.bank.dto.BankDataTransferObject;
 import br.com.bank.dto.BankDataTransferObjectDeposit;
 
 public interface BankService {
-    void checkIfThereIsALimitOnTheCardAndDebitTheAvailableAmount(
-            BankDataTransferObject bankDTO);
+  void checkIfThereIsALimitOnTheCardAndDebitTheAvailableAmount(BankDataTransferObject bankDTO);
 
-    Bank save(BankDataTransferObject bankDTO);
-
-    Bank depositValueValueInAccount(
-            BankDataTransferObjectDeposit bankDTODeposit);
+  Bank depositValueValueInAccount(BankDataTransferObjectDeposit bankDTODeposit);
 }

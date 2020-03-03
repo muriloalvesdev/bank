@@ -25,11 +25,6 @@ public class BankController {
     return ResponseEntity.ok().build();
   }
 
-  @PostMapping("save")
-  public ResponseEntity<Bank> save(@RequestBody BankDataTransferObject bankDTO) {
-    return ResponseEntity.ok(bankService.save(bankDTO));
-  }
-
   @PostMapping("deposit")
   public ResponseEntity<Bank> deposit(@RequestBody BankDataTransferObjectDeposit bankDTODeposit) {
     return ResponseEntity.ok(bankService.depositValueValueInAccount(bankDTODeposit));
