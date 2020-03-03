@@ -12,5 +12,4 @@ public interface BankService {
 
   CardsDataTransferObject findByCode(String code);
 
-  BankDataTransferObject findBankByName(String name);
 }

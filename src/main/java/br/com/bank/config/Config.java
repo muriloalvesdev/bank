@@ -25,8 +25,11 @@ public class Config {
     if (!bankRepository.findByName("NUBANK").isPresent()) {
       Bank bank = bankRepository.saveAndFlush(
           new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "NUBANK"));
-      cardsRepository
-          .saveAndFlush(new Cards(789, "9999888877776666", LocalDate.parse("01-01-2100"), bank));
+
+      Cards card = new Cards(789, "9999888877776666", LocalDate.parse("01-01-2100"), bank);
+      cardsRepository.saveAndFlush(card);
+      bank.setCard(card);
+      bankRepository.saveAndFlush(bank);
     }
   }
 }

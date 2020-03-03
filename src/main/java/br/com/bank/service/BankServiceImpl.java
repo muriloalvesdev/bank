@@ -1,7 +1,6 @@
 package br.com.bank.service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Optional;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,29 +27,6 @@ public class BankServiceImpl implements BankService {
 
   @Autowired
   private CardsRepository cardsRepository;
-
-  @Override
-  public BankDataTransferObject findBankByName(String name) {
-
-    Bank bank = bankRepository.findByName(name)
-        .orElseThrow(() -> new BankNotFoundException("Bank informed not found!"));
-
-    BankDataTransferObject bankDTO = new BankDataTransferObject();
-
-    bankDTO.setAmountSale(bank.getAmountAvailable().toString());
-    if (bank.getCard() != null) {
-      bankDTO.setCard(createCardDTO(bank.getCard()));
-    } else {
-      Cards card = new Cards(789, "9999888877776666", LocalDate.parse("01-01-2030"), bank);
-      bank.setCard(card);
-      bankRepository.saveAndFlush(bank);
-      cardsRepository.saveAndFlush(card);
-
-      bankDTO.setCard(createCardDTO(bank.getCard()));
-    }
-
-    return bankDTO;
-  }
 
   @Override
   public CardsDataTransferObject findByCode(String code) {

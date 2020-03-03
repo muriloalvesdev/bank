@@ -45,10 +45,4 @@ public class BankController {
     return ResponseEntity.ok(bankService.findByCode(code));
   }
 
-  @GetMapping("find/bank/{name}")
-  public ResponseEntity<BankDataTransferObject> findBankByName(
-      @PathVariable(name = "name", required = true) String name) {
-    return ResponseEntity.ok(bankService.findBankByName(name));
-  }
-
 }
