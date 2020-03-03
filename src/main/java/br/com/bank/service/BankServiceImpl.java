@@ -13,6 +13,7 @@ import br.com.bank.dto.BankDataTransferObject;
 import br.com.bank.dto.BankDataTransferObjectDeposit;
 import br.com.bank.dto.CardsDataTransferObject;
 import br.com.bank.service.exception.BankNotFoundException;
+import br.com.bank.service.exception.CardNotFoundException;
 import br.com.bank.service.exception.LimitNotAvailableException;
 import javassist.NotFoundException;
 
@@ -28,10 +29,31 @@ public class BankServiceImpl implements BankService {
   private CardsRepository cardsRepository;
 
   @Override
+  public BankDataTransferObject findBankByName(String name) {
+
+    Bank bank = bankRepository.findByName(name)
+        .orElseThrow(() -> new BankNotFoundException("Bank informed not found!"));
+
+    BankDataTransferObject bankDTO = new BankDataTransferObject();
+
+    bankDTO.setAmountSale(bank.getAmountAvailable().toString());
+    if (bank.getCard() != null) {
+      bankDTO.setCard(createCardDTO(bank.getCard()));
+    }
+
+    return bankDTO;
+  }
+
+  @Override
   public CardsDataTransferObject findByCode(String code) {
     Cards cards = cardsRepository.findBySecurityCode(Integer.parseInt(code))
-        .orElseThrow(() -> new RuntimeException("code informed not found!"));
+        .orElseThrow(() -> new CardNotFoundException("code informed not found!"));
 
+    CardsDataTransferObject cardsDTO = createCardDTO(cards);
+    return cardsDTO;
+  }
+
+  private CardsDataTransferObject createCardDTO(Cards cards) {
     CardsDataTransferObject cardsDTO = new CardsDataTransferObject();
     cardsDTO.setCardNumber(cards.getCardNumber());
     cardsDTO.setSecurityCode(cards.getSecurityCode().toString());

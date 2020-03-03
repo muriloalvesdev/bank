@@ -11,4 +11,6 @@ public interface BankService {
   Bank depositValueValueInAccount(BankDataTransferObjectDeposit bankDTODeposit);
 
   CardsDataTransferObject findByCode(String code);
+
+  BankDataTransferObject findBankByName(String name);
 }
