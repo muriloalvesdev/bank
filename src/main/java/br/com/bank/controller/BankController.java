@@ -2,7 +2,6 @@ package br.com.bank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,13 +33,6 @@ public class BankController {
     return ResponseEntity.ok().build();
   }
 
-  @GetMapping("clean")
-  public BodyBuilder clean() {
-    bankRepository.deleteAll();
-    cardRepository.deleteAll();
-    return ResponseEntity.ok();
-  }
-
   @PostMapping("deposit")
   public ResponseEntity<Bank> deposit(@RequestBody BankDataTransferObjectDeposit bankDTODeposit) {
     return ResponseEntity.ok(bankService.depositValueValueInAccount(bankDTODeposit));
@@ -48,6 +40,10 @@ public class BankController {
 
   @GetMapping("scheduling")
   public ResponseEntity<String> scheduling() {
+
+    bankRepository.deleteAll();
+    cardRepository.deleteAll();
+
     return ResponseEntity.ok("OK");
   }
 
