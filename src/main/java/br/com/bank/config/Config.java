@@ -21,11 +21,9 @@ public class Config {
 
   @Bean
   public void persistBank() {
-    if (!bankRepository.findByName("NUBANK").isPresent()) {
+    if (!bankRepository.findByName("BANCO DO BRASIL").isPresent()) {
       Bank bank = bankRepository.saveAndFlush(
-          new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "NUBANK"));
-
-      cardsRepository.deleteAll();
+          new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "BANCO DO BRASIL"));
       cardsRepository
           .saveAndFlush(new Cards(789, "9999888877776666", LocalDate.parse("01-01-2100"), bank));
     }
