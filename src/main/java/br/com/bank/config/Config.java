@@ -22,7 +22,7 @@ public class Config {
   @Bean
   public void persistBank() {
     if (!bankRepository.findByName("NUBANK").isPresent()
-        && cardsRepository.findBySecurityCode(789).isPresent()) {
+        && !cardsRepository.findBySecurityCode(789).isPresent()) {
       Bank bank = bankRepository.saveAndFlush(
           new Bank("00001", "1234-x", BigDecimal.valueOf(876543456723345L), "NUBANK"));
       cardsRepository
