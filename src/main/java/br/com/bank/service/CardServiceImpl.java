@@ -51,20 +51,6 @@ public class CardServiceImpl implements CardService {
   public Cards verifyContainsCard(BankDataTransferObject bankDTO) throws NotFoundException {
     CardDataTransferObject card = bankDTO.getCard();
     Integer securityCode = Integer.parseInt(card.getSecurityCode());
-
-    Cards cards = cardRepository.findAll().get(0);
-
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("---------");
-    System.out.println("SEEEEECUUUURIIIITYYYY --->>>>" + cards.getSecurityCode());
-
     return cardRepository.findBySecurityCode(securityCode).orElseThrow(() -> new NotFoundException(
         "SecurityCode in Card informed [" + card.getSecurityCode() + "] not found!"));
   }
