@@ -3,9 +3,11 @@ package br.com.bank.controller;
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.bank.dto.CardDataTransferObject;
@@ -25,7 +27,8 @@ public class CardController {
   }
 
   @PostMapping("save")
-  public ResponseEntity<CardDataTransferObject> save(CardDataTransferObject cardDTO) {
+  public ResponseEntity<CardDataTransferObject> save(
+      @Validated @RequestBody CardDataTransferObject cardDTO) {
     return ResponseEntity.created(URI.create("find/" + cardDTO.getSecurityCode()))
         .body(service.save(cardDTO));
   }

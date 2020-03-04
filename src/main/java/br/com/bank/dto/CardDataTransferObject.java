@@ -10,7 +10,7 @@ public class CardDataTransferObject {
   @NotNull
   private String securityCode;
 
-  @JsonProperty("card_holder")
+  @JsonProperty("card_number")
   @NotNull
   private String cardNumber;
 
@@ -54,7 +54,7 @@ public class CardDataTransferObject {
 
   @Override
   public String toString() {
-    return "CardsDataTransferObject [securityCode=" + securityCode + ", cardNumber=" + cardNumber
+    return "CardDataTransferObject [securityCode=" + securityCode + ", cardNumber=" + cardNumber
         + ", validate=" + validate + "]";
   }
 
