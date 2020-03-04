@@ -26,6 +26,7 @@ public class CardServiceImpl implements CardService {
   public CardDataTransferObject save(CardDataTransferObject cardDTO) {
     Bank bank = bankRepository.findAll().get(0);
     Cards card = Convert.convertToEntity(cardDTO, bank);
+    cardRepository.saveAndFlush(card);
     return Convert.convertToDTO(card);
   }
 
