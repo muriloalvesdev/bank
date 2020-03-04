@@ -3,17 +3,13 @@ package br.com.bank.service;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.bank.domain.model.Bank;
 import br.com.bank.domain.model.Cards;
 import br.com.bank.domain.repository.BankRepository;
-import br.com.bank.domain.repository.CardsRepository;
 import br.com.bank.dto.BankDataTransferObject;
 import br.com.bank.dto.BankDataTransferObjectDeposit;
-import br.com.bank.dto.CardsDataTransferObject;
 import br.com.bank.service.exception.BankNotFoundException;
-import br.com.bank.service.exception.CardNotFoundException;
 import br.com.bank.service.exception.LimitNotAvailableException;
 import javassist.NotFoundException;
 
@@ -22,27 +18,12 @@ public class BankServiceImpl implements BankService {
 
   private static final Logger LOG = Logger.getLogger(BankServiceImpl.class);
 
-  @Autowired
   private BankRepository bankRepository;
+  private CardService cardService;
 
-  @Autowired
-  private CardsRepository cardsRepository;
-
-  @Override
-  public CardsDataTransferObject findByCode(String code) {
-    Cards cards = cardsRepository.findBySecurityCode(Integer.parseInt(code))
-        .orElseThrow(() -> new CardNotFoundException("code informed not found!"));
-
-    CardsDataTransferObject cardsDTO = createCardDTO(cards);
-    return cardsDTO;
-  }
-
-  private CardsDataTransferObject createCardDTO(Cards cards) {
-    CardsDataTransferObject cardsDTO = new CardsDataTransferObject();
-    cardsDTO.setCardNumber(cards.getCardNumber());
-    cardsDTO.setSecurityCode(cards.getSecurityCode().toString());
-    cardsDTO.setValidate(cards.getValidate().toString());
-    return cardsDTO;
+  public BankServiceImpl(BankRepository bankRepository, CardService cardService) {
+    this.bankRepository = bankRepository;
+    this.cardService = cardService;
   }
 
   @Override
@@ -58,7 +39,7 @@ public class BankServiceImpl implements BankService {
   }
 
   private Bank findBankDatabase(BankDataTransferObject bankDTO) throws NotFoundException {
-    Cards card = verifyContainsCard(bankDTO);
+    Cards card = cardService.verifyContainsCard(bankDTO);
     return card.getBank();
   }
 
@@ -96,13 +77,6 @@ public class BankServiceImpl implements BankService {
     } else {
       throw new LimitNotAvailableException("Não existe limite suficiente");
     }
-  }
-
-  private Cards verifyContainsCard(BankDataTransferObject bankDTO) throws NotFoundException {
-    CardsDataTransferObject card = bankDTO.getCard();
-    Integer securityCode = Integer.parseInt(card.getSecurityCode());
-    return cardsRepository.findBySecurityCode(securityCode).orElseThrow(() -> new NotFoundException(
-        "SecurityCode in Card informed [" + card.getSecurityCode() + "] not found!"));
   }
 
   private void verifyBankNotExist(Optional<Bank> bankOptional) {

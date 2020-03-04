@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CardsDataTransferObject {
+public class CardDataTransferObject {
 
   @JsonProperty("security_code")
   @NotNull
@@ -18,6 +18,15 @@ public class CardsDataTransferObject {
   @JsonFormat(pattern = "dd-MM-yyyy")
   @NotNull
   private String validate;
+
+  public CardDataTransferObject(@NotNull String securityCode, @NotNull String cardNumber,
+      @NotNull String validate) {
+    this.securityCode = securityCode;
+    this.cardNumber = cardNumber;
+    this.validate = validate;
+  }
+
+  public CardDataTransferObject() {}
 
   public String getSecurityCode() {
     return securityCode;

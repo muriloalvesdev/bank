@@ -8,17 +8,17 @@ public class BankDataTransferObject {
   private String amountSale;
 
   @JsonProperty("card")
-  private CardsDataTransferObject card;
+  private CardDataTransferObject card;
 
   public String getAmountSale() {
     return amountSale;
   }
 
-  public CardsDataTransferObject getCard() {
+  public CardDataTransferObject getCard() {
     return card;
   }
 
-  public void setCard(CardsDataTransferObject card) {
+  public void setCard(CardDataTransferObject card) {
     this.card = card;
   }
 
