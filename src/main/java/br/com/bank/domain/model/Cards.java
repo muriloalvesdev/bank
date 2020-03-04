@@ -29,7 +29,7 @@ public class Cards extends BaseEntity {
   private String cardNumber;
 
   @Column(name = "validate")
-  @JsonFormat(pattern = "dd-MM-yyyy")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDate validate;
 
   @OneToOne(optional = false)

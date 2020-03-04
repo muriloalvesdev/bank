@@ -15,7 +15,7 @@ public class CardDataTransferObject {
   private String cardNumber;
 
   @JsonProperty("validate")
-  @JsonFormat(pattern = "dd-MM-yyyy")
+  @JsonFormat(pattern = "yyyy-MM-dd")
   @NotNull
   private String validate;
 
