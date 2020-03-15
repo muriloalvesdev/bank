@@ -44,7 +44,8 @@ public class BankServiceImpl implements BankService {
   }
 
   @Override
-  public Bank depositValueValueInAccount(BankDataTransferObjectDeposit bankDTODeposit) {
+  public BankDataTransferObjectDeposit depositValueValueInAccount(
+      BankDataTransferObjectDeposit bankDTODeposit) {
     LOG.info("Verify bank informed exist...");
     Optional<Bank> bankOptional = bankRepository.findByName(bankDTODeposit.getName())
         .filter(bank -> bankDTODeposit.getAccount().equals(bankDTODeposit.getAccount())
@@ -56,7 +57,9 @@ public class BankServiceImpl implements BankService {
     LOG.info("Depositing amount into your account...");
     bank.setAmountAvailable(bank.getAmountAvailable()
         .add(BigDecimal.valueOf(Double.parseDouble(bankDTODeposit.getAmountDeposit()))));
-    return bankRepository.save(bank);
+    bankRepository.saveAndFlush(bank);
+
+    return bankDTODeposit;
 
   }
 
@@ -83,5 +86,12 @@ public class BankServiceImpl implements BankService {
     if (!bankOptional.isPresent()) {
       throw new BankNotFoundException("Bank informed not found!");
     }
+  }
+
+
+  // por enquanto é uma conta única, modificar api para retornar o valor de uma conta informada.
+  @Override
+  public String valueAvailable() {
+    return bankRepository.findAll().get(0).getAmountAvailable().toString();
   }
 }
