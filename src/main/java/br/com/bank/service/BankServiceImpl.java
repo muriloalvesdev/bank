@@ -44,7 +44,8 @@ public class BankServiceImpl implements BankService {
   }
 
   @Override
-  public Bank depositValueValueInAccount(BankDataTransferObjectDeposit bankDTODeposit) {
+  public BankDataTransferObjectDeposit depositValueValueInAccount(
+      BankDataTransferObjectDeposit bankDTODeposit) {
     LOG.info("Verify bank informed exist...");
     Optional<Bank> bankOptional = bankRepository.findByName(bankDTODeposit.getName())
         .filter(bank -> bankDTODeposit.getAccount().equals(bankDTODeposit.getAccount())
@@ -56,7 +57,9 @@ public class BankServiceImpl implements BankService {
     LOG.info("Depositing amount into your account...");
     bank.setAmountAvailable(bank.getAmountAvailable()
         .add(BigDecimal.valueOf(Double.parseDouble(bankDTODeposit.getAmountDeposit()))));
-    return bankRepository.save(bank);
+    bankRepository.saveAndFlush(bank);
+
+    return bankDTODeposit;
 
   }
 
