@@ -1,8 +1,8 @@
 package br.com.bank.controller;
 
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,14 +21,14 @@ public class BankController {
 
   @PostMapping("debit/authorization")
   public ResponseEntity<Object> debitAuthorization(
-      @Valid @RequestBody BankDataTransferObject bankDTO) {
+      @Validated @RequestBody BankDataTransferObject bankDTO) {
     bankService.checkIfThereIsALimitOnTheCardAndDebitTheAvailableAmount(bankDTO);
     return ResponseEntity.ok().build();
   }
 
   @PostMapping("deposit")
   public ResponseEntity<BankDataTransferObjectDeposit> deposit(
-      @RequestBody BankDataTransferObjectDeposit bankDTODeposit) {
+      @Validated @RequestBody BankDataTransferObjectDeposit bankDTODeposit) {
     return ResponseEntity.ok(bankService.depositValueValueInAccount(bankDTODeposit));
   }
 
