@@ -87,4 +87,11 @@ public class BankServiceImpl implements BankService {
       throw new BankNotFoundException("Bank informed not found!");
     }
   }
+
+
+  // por enquanto é uma conta única, modificar api para retornar o valor de uma conta informada.
+  @Override
+  public String valueAvailable() {
+    return bankRepository.findAll().get(0).getAmountAvailable().toString();
+  }
 }
