@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
 public class LimitNotAvailableException extends RuntimeException {
 
-    private static final long serialVersionUID = -4126215176840743512L;
+  private static final long serialVersionUID = -4126215176840743512L;
 
-    public LimitNotAvailableException(String message) {
-        super(message);
-    }
+  public LimitNotAvailableException(String message) {
+    super(message);
+  }
 
 }

@@ -10,5 +10,5 @@ import br.com.bank.domain.model.Bank;
 
 @Repository
 public interface BankRepository extends JpaRepository<Bank, UUID> {
-    Optional<Bank> findByName(String name);
+  Optional<Bank> findByName(String name);
 }
