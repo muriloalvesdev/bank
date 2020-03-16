@@ -9,6 +9,7 @@ import br.com.bank.domain.model.Cards;
 import br.com.bank.domain.repository.BankRepository;
 import br.com.bank.dto.BankDataTransferObject;
 import br.com.bank.dto.BankDataTransferObjectDeposit;
+import br.com.bank.resource.BankResource;
 import br.com.bank.service.exception.BankNotFoundException;
 import br.com.bank.service.exception.LimitNotAvailableException;
 import javassist.NotFoundException;
@@ -89,9 +90,17 @@ public class BankServiceImpl implements BankService {
   }
 
 
-  // por enquanto é uma conta única, modificar api para retornar o valor de uma conta informada.
   @Override
-  public String valueAvailable() {
-    return bankRepository.findAll().get(0).getAmountAvailable().toString();
+  public String valueAvailable(BankResource bankResource) {
+
+    Optional<Bank> bankOptional =
+        bankRepository.findByName(bankResource.getBankName().toUpperCase());
+
+    if (bankOptional.isPresent()) {
+      Bank bank = bankOptional.get();
+      return bank.getAmountAvailable().toString();
+    }
+
+    return "BANK NOT EXIST!";
   }
 }
