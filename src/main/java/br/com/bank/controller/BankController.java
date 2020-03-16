@@ -38,8 +38,8 @@ public class BankController {
     return ResponseEntity.ok(bankService.valueAvailable(bankResource));
   }
 
-  @GetMapping("scheduling")
-  public ResponseEntity<String> scheduling() {
+  @GetMapping("/")
+  public ResponseEntity<String> ok() {
     return ResponseEntity.ok("OK");
   }
 
