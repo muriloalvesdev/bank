@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.bank.dto.BankDataTransferObject;
 import br.com.bank.dto.BankDataTransferObjectDeposit;
+import br.com.bank.resource.BankResource;
 import br.com.bank.service.BankService;
 
 @RestController
@@ -33,8 +34,8 @@ public class BankController {
   }
 
   @GetMapping("available")
-  public ResponseEntity<String> valueAvailable() {
-    return ResponseEntity.ok(bankService.valueAvailable());
+  public ResponseEntity<String> valueAvailable(@Validated @RequestBody BankResource bankResource) {
+    return ResponseEntity.ok(bankService.valueAvailable(bankResource));
   }
 
   @GetMapping("scheduling")
