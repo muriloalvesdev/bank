@@ -14,14 +14,14 @@
 
 #### Descrição da API authDebit
 ##### Este endpoint é responsável por receber uma requisição do módulo Holder, o mesmo deve efetuar o débito na conta do cliente ou diminuir o valor disponível para compra no cartão de crédito informado.
-![auth-debit](https://github.com/muriloalvesdev/bank/blob/master/src/main/resources/swagger/debit-auth-swagger)
+![auth-debit](https://github.com/muriloalvesdev/bank/blob/master/src/main/resources/swagger/debit-auth-swagger.png)
 
 
 #### Descrição da API Deposit
 ##### Este endpoint representa um depósito em conta do cliente.
-![deposit](https://github.com/muriloalvesdev/bank/blob/master/src/main/resources/swagger/swagger-deposit)
+![deposit](https://github.com/muriloalvesdev/bank/blob/master/src/main/resources/swagger/swagger-deposit.png)
 
 
 #### Descrição da API findByCode
 ##### Este endpoint é responsável por buscar um cartão cadastrado no banco de dados através do code-security informado.
-![deposit](https://github.com/muriloalvesdev/bank/blob/master/src/main/resources/swagger/swagger-find-code)
+![deposit](https://github.com/muriloalvesdev/bank/blob/master/src/main/resources/swagger/swagger-find-code.png)
