@@ -3,21 +3,26 @@ package br.com.bank.dto;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import br.com.bank.resource.BankResource;
 
 public class CardDataTransferObject {
 
   @JsonProperty("security_code")
-  @NotNull
+  @NotNull(message = "security_code is required!")
   private String securityCode;
 
   @JsonProperty("card_number")
-  @NotNull
+  @NotNull(message = "card_number is required!")
   private String cardNumber;
 
   @JsonProperty("validate")
   @JsonFormat(pattern = "yyyy-MM-dd")
-  @NotNull
+  @NotNull(message = "validate is required!")
   private String validate;
+
+  @JsonProperty("bank_owner")
+  @NotNull(message = "bank_owner is required!")
+  private BankResource bankResource;
 
   public CardDataTransferObject(@NotNull String securityCode, @NotNull String cardNumber,
       @NotNull String validate) {
